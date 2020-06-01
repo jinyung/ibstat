@@ -1,0 +1,16 @@
+Package: ibstat
+Type: Package
+Title: Sort data from iButton
+Version: 0.0.1
+Authors@R: c(person("Jin Yung", "Wong", 
+          email = "wongjinyung@gmail.com", role = c("aut", "cre")),
+          person("Benny K. K.", "Chan", email = "chankk@gate.sinica.edu.tw", 
+          role = "rth"))
+Description: Generate basic stats from iButton's data and detect events of interest 
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/jinyung/ibstat
+Author: Jin Yung Wong [aut, cre],
+  Benny K. K. Chan [rth]
+  
