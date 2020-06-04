@@ -11,7 +11,13 @@ ibsummary <- function(dat, type = c('day', 'month'), timerange) {
   ampm <- sapply(date_time_ls, `[`, 2)
   time <- sapply(date_time_ls, `[`, 3)
   # convert time into 24 hour format
+  # change system time to avoid problem
+  # backup original locale
+  bkp <- Sys.getlocale('LC_TIME')
+  # change locale
+  Sys.setlocale('LC_TIME','C')
   time <- format(strptime(paste(time, ampm), "%I:%M:%S %p"), "%H:%M:%S")
+  Sys.setlocale('LC_TIME', bkp)
   
   # filter time range if given
   if (!missing(timerange)) {

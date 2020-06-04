@@ -37,13 +37,13 @@ run_ibex <- function(temp_cut, duration_cut, type = c('min', 'max')) {
               file.path(savedir, 
                         paste0('ibex_event_date_and_interval_temp_', 
                                temp_cut, '_duration_', 
-                               duration_cut, '_', basename(i))), 
+                               duration_cut, '_', type, '_', basename(i))), 
               row.names = FALSE)
     write.csv(result$event_freq_by_month, 
               file.path(savedir, 
                         paste0('ibex_event_freq_by_month_temp_', 
                                temp_cut, '_duration_', 
-                               duration_cut, '_', basename(i))), 
+                               duration_cut, '_', type, '_', basename(i))), 
               row.names = FALSE)
   }
 }
