@@ -5,10 +5,6 @@
 
 ibsummary <- function(dat, type = c('day', 'month'), timerange) {
   
-  # filter time range if given
-  if (!missing(timerange))
-    dat <- dat[time >= timerange[1] & time <= timerange[2], ]
-  
   # split the date time column
   date_time_ls <- strsplit(as.character(dat$`Date/Time`), ' ')
   datec <- sapply(date_time_ls, `[`, 1)
@@ -16,6 +12,13 @@ ibsummary <- function(dat, type = c('day', 'month'), timerange) {
   time <- sapply(date_time_ls, `[`, 3)
   # convert time into 24 hour format
   time <- format(strptime(paste(time, ampm), "%I:%M:%S %p"), "%H:%M:%S")
+  
+  # filter time range if given
+  if (!missing(timerange)) {
+    subsetidx <- which(time >= timerange[1] & time < timerange[2])
+    datec <- datec[subsetidx]
+    dat <- dat[subsetidx, ] 
+  }
   
   # stats
   temp <- dat$Value
