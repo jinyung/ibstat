@@ -5,9 +5,14 @@ run_ibsummary <- function() {
   filelist <- list.files(dir, pattern = '.csv', full.names = TRUE)
   savedir <- file.path(dir, 'ibsummary_results')
   dir.create(savedir)
+  cat('Results will be saved at:', savedir)
   for(i in filelist) {
     dat <- readib_zh(i)
-    write.csv(ibsummary(dat), file.path(savedir, paste0('ibsummary_', basename(i))), 
+    write.csv(ibsummary(dat), 
+              file.path(savedir, paste0('ibsummary_daily_', basename(i))), 
+              row.names = FALSE)
+    write.csv(ibsummary(dat, type = 'month'), 
+              file.path(savedir, paste0('ibsummary_monthly_', basename(i))), 
               row.names = FALSE)
     write.csv(ibsummary(dat, timerange = c('00:00', '06:00')), 
               file.path(savedir, paste0('ibsummary_0000_0600_', basename(i))), 
@@ -29,6 +34,7 @@ run_ibex <- function(temp_cut, duration_cut, type = c('min', 'max')) {
   filelist <- list.files(dir, pattern = '.csv', full.names = TRUE)
   savedir <- file.path(dir, 'ibex_results')
   dir.create(savedir)
+  cat('Results will be saved at:', savedir)
   type <- match.arg(type)
   for(i in filelist) {
     dat <- readib_zh(i)
